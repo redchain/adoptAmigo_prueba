@@ -6,18 +6,17 @@ import "package:shared_preferences/shared_preferences.dart";
 import 'home.dart';
 
 
-
-
 class AuthUser extends StatelessWidget {
   const AuthUser({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //se añade firebaseAuth 
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return LoginScreen();
+          return LoginScreen();    //Pagina para hacer screen 
         }
 
         return HomePage();
