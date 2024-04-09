@@ -1,66 +1,55 @@
-import 'package:adopta_amigo/app/profile.dart';
+import 'package:adopta_amigo/app/profile/profile.dart';
 
 import 'package:flutter/material.dart';
-
 
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {  
-
-  var selectedIndex = 0;  
-
-
+class _HomePageState extends State<HomePage> {
+  var selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-     return NewsFeedPage2();
+    return NewsFeedPage2();
   }
 }
 
-class NewsFeedPage2 extends StatelessWidget {    
+class NewsFeedPage2 extends StatelessWidget {
+  NewsFeedPage2({Key? key}) : super(key: key);
 
-  NewsFeedPage2({Key? key}) : super(key: key);  
-  
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-
     final width = MediaQuery.of(context).size.width;
-    final bool isLargeScreen = width > 800;   
-    
-    return Theme(   
-    data: ThemeData.dark(),
-    child: Scaffold(
-     key: _scaffoldKey,
-      appBar:  AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          titleSpacing: 0,
-          leading: isLargeScreen
-              ? null
-              : IconButton(
-                  icon: const Icon(Icons.menu),
-                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-                ),
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 11.0),
+    final bool isLargeScreen = width > 800;
 
-            child: AspectRatio(
-            aspectRatio: 4,
-
-            child: Image.asset('../assets/logo_2.png'),
-          ),            
-          )
-          
-        ),
-      drawer: isLargeScreen ? null : DrawerMenu(scaffoldKey: _scaffoldKey),
-      body:       
-          MainListPets(),  
-    ),
+    return Theme(
+      data: ThemeData.dark(),
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            titleSpacing: 0,
+            leading: isLargeScreen
+                ? null
+                : IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                  ),
+            title: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 11.0),
+              child: AspectRatio(
+                aspectRatio: 4,
+                child: Image.asset('../assets/logo_2.png'),
+              ),
+            )),
+        drawer: isLargeScreen ? null : DrawerMenu(scaffoldKey: _scaffoldKey),
+        body: MainListPets(),
+      ),
     );
   }
 
@@ -71,8 +60,7 @@ class NewsFeedPage2 extends StatelessWidget {
             .map(
               (item) => InkWell(
                 onTap: () {
-                 print("tapped on container");
-
+                  print("tapped on container");
                 },
                 // onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                 child: Padding(
@@ -105,8 +93,7 @@ class MainListPets extends StatelessWidget {
             final item = _articles[index];
             return Container(
               height: 136,
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
               decoration: BoxDecoration(
                   border: Border.all(color: const Color(0xFFE0E0E0)),
                   borderRadius: BorderRadius.circular(8.0)),
@@ -136,8 +123,7 @@ class MainListPets extends StatelessWidget {
                           Icons.more_vert
                         ].map((e) {
                           return InkWell(
-                            onTap: () {           
-                            },
+                            onTap: () {},
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8.0),
                               child: Icon(e, size: 16),
@@ -168,37 +154,30 @@ class MainListPets extends StatelessWidget {
 }
 
 class DrawerMenu extends StatelessWidget {
-  const DrawerMenu({
-    super.key,
-    required GlobalKey<ScaffoldState> scaffoldKey
-  }) : _scaffoldKey = scaffoldKey;
+  const DrawerMenu({super.key, required GlobalKey<ScaffoldState> scaffoldKey})
+      : _scaffoldKey = scaffoldKey;
 
   final GlobalKey<ScaffoldState> _scaffoldKey;
 
   @override
   Widget build(BuildContext context) => Drawer(
         child: ListView(
-          
           children: _menuItems
               .map((item) => ListTile(
                     onTap: () {
-                      if(item =="Profile"){
-                        Navigator.push(
-                        context,
-                       MaterialPageRoute(builder: (context) => Profile())
-                      );
-                    }else if (item == "Home"){
-                       Navigator.pop(context);
-                    }
-                    
+                      if (item == "Profile") {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Profile()));
+                      } else if (item == "Home") {
+                        Navigator.pop(context);
+                      }
                     },
                     title: Text(item),
                   ))
               .toList(),
         ),
-    );
+      );
 }
-
 
 class Article {
   final String title;
