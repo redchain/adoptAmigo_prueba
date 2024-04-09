@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "584743494623",
+    "firebase_url": "https://prueba-46e03-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "prueba-46e03",
+    "storage_bucket": "prueba-46e03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584743494623:android:e105a0b66d8778b83e1a6a",
+        "android_client_info": {
+          "package_name": "com.example.adopta_amigo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9EJFOzP4WQ3FAufvIZZCQ-1Cc-FrhNJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584743494623:android:2ffff0384926cd723e1a6a",
+        "android_client_info": {
+          "package_name": "com.example.adoptamigo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9EJFOzP4WQ3FAufvIZZCQ-1Cc-FrhNJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
