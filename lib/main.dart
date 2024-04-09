@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import "app.dart";
+import "app/app.dart";
 
-import 'package:adopta_amigo/firebase_options.dart';
+import 'package:adopta_amigo/app/firebase_options.dart';
 
 
 void main() async {
