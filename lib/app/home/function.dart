@@ -38,32 +38,32 @@ Future getPetList() async {
   QuerySnapshot querySnapshot = await db.collection("animales").get();
 
   for (var docSnapshot in querySnapshot.docs) {
-    Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+    final data = docSnapshot.data() as Map<String, dynamic>;
 
     // Access specific fields in the document
-    var nombre = data['nombre'];
-    var descripcion = data['descripcion'];
-    var especie = data['especie'];
-    var urlImage = data['urlImage'];
-    var idProtectora = data['idProtectora'];
+    // var nombre = data['nombre'];
+    // var descripcion = data['descripcion'];
+    // var especie = data['especie'];
+    // var urlImage = data['urlImage'];
+    // var idProtectora = data['idProtectora'];
 
-    animales!.add(getPet(nombre, especie, descripcion, urlImage, idProtectora));
+    animales!.add(Pet.fromMap(data));
   }
 
   return animales;
 }
 
-Pet getPet(String nombre, String especie, String descripcion, String urlImage,
-    String idProtectora) {
-  final data = Pet(
-      nombre: nombre,
-      especie: especie,
-      descripcion: descripcion,
-      urlImage: urlImage,
-      idProtectora: idProtectora);
+// Pet getPet(String nombre, String especie, String descripcion, String urlImage,
+//     String idProtectora) {
+//   final data = Pet(
+//       nombre: nombre,
+//       especie: especie,
+//       descripcion: descripcion,
+//       urlImage: urlImage,
+//       idProtectora: idProtectora);
 
-  return data;
-}
+//   return data;
+// }
 
 /*
 final List<Article> _articles = [
