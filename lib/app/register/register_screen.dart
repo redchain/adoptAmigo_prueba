@@ -171,11 +171,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: <Widget>[
                       Text("Already have an account?"),
                       // todo: poner TextButton
-                      Text(
-                        "Login",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 18),
-                      ),
+                         TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('Login',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: Colors.black)),
+                          ),
+                      
                     ],
                   )),
             ],

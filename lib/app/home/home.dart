@@ -1,6 +1,9 @@
 import 'package:adopta_amigo/app/profile/profile.dart';
-
 import 'package:flutter/material.dart';
+import 'package:adopta_amigo/app/home/function.dart';
+import 'package:adopta_amigo/app/model/pet.dart';
+
+final List<String> _menuItems = <String>['Home', 'Pefil ', 'Protectoras'];
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,12 +15,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return NewsFeedPage2();
+    return PetList();
   }
 }
 
-class NewsFeedPage2 extends StatelessWidget {
-  NewsFeedPage2({Key? key}) : super(key: key);
+class PetList extends StatelessWidget {
+  PetList({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -25,10 +28,9 @@ class NewsFeedPage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final bool isLargeScreen = width > 800;
-
-    return Theme(
-      data: ThemeData.dark(),
-      child: Scaffold(
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
             backgroundColor: Colors.transparent,
@@ -52,29 +54,6 @@ class NewsFeedPage2 extends StatelessWidget {
       ),
     );
   }
-
-  Widget _navBarItems() => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: _menuItems
-            .map(
-              (item) => InkWell(
-                onTap: () {
-                  print("tapped on container");
-                },
-                // onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 24.0, horizontal: 16),
-                  child: Text(
-                    item,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                ),
-              ),
-            )
-            .toList(),
-      );
 }
 
 class MainListPets extends StatelessWidget {
@@ -84,72 +63,80 @@ class MainListPets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 400),
-        child: ListView.builder(
-          itemCount: _articles.length,
-          itemBuilder: (BuildContext context, int index) {
-            final item = _articles[index];
-            return Container(
-              height: 136,
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
-              decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFE0E0E0)),
-                  borderRadius: BorderRadius.circular(8.0)),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item.title,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 8),
-                      Text("${item.author} · ${item.postedOn}",
-                          style: Theme.of(context).textTheme.caption),
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icons.bookmark_border_rounded,
-                          Icons.share,
-                          Icons.more_vert
-                        ].map((e) {
-                          return InkWell(
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Icon(e, size: 16),
-                            ),
-                          );
-                        }).toList(),
-                      )
-                    ],
-                  )),
-                  Container(
-                      width: 100,
-                      height: 100,
+    return FutureBuilder<dynamic>(
+        future: getPetList(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 400),
+                child: ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = snapshot.data[index];
+                    return Container(
+                      height: 136,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8.0),
                       decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(8.0),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(item.imageUrl),
-                          ))),
-                ],
+                          border: Border.all(color: const Color(0xFFE0E0E0)),
+                          borderRadius: BorderRadius.circular(8.0)),
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item.nombre,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),                 
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icons.bookmark_border_rounded,
+                                  Icons.share,
+                                  Icons.more_vert
+                                ].map((e) {
+                                  return InkWell(
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: Icon(e, size: 16),
+                                    ),
+                                  );
+                                }).toList(),
+                              )
+                            ],
+                          )),
+                          Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(item.imageUrl),
+                                  ))),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             );
-          },
-        ),
-      ),
-    );
+          }
+
+          return CircularProgressIndicator();
+        });
   }
 }
 
@@ -236,9 +223,4 @@ final List<Article> _articles = [
     imageUrl: "https://picsum.photos/id/1060/960/540",
     postedOn: "10 hours ago",
   ),
-];
-
-final List<String> _menuItems = <String>[
-  'Home',
-  'Profile',
 ];
