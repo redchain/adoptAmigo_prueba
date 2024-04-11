@@ -2,13 +2,15 @@ class Customer {
   final String nombre;
   final String apellido;
   final String email;
-  final String edad;
+  final String telefono;
+  final String fechaRegistro; 
 
   Customer({
     required this.nombre,
     required this.apellido,
-    required this.edad,
     required this.email,
+    required this.telefono,
+    required this.fechaRegistro
   });
 
   Map<String, dynamic> toMap() {
@@ -16,7 +18,8 @@ class Customer {
       'nombre': nombre,
       'apellido': apellido,
       'email': email,
-      'edad': edad,
+      'telefono': telefono,
+      'fechaRegistro' : fechaRegistro
     };
   }
 
@@ -25,7 +28,8 @@ class Customer {
       nombre: map['nombre'] as String,
       apellido: map['apellido'] as String,
       email: map['email'] as String,
-      edad: map['edad'] as String,
+      telefono: map['telefono'] as String,
+      fechaRegistro: map['fechaRegistro'] as String,
     );
   }
 }

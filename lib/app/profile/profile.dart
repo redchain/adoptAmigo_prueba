@@ -121,7 +121,7 @@ class BackButton extends StatelessWidget {
       highlightColor: Colors.pink,
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       },
     );
   }

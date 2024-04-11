@@ -3,6 +3,7 @@ import 'package:adopta_amigo/app/register/function.dart';
 import 'package:adopta_amigo/app/widgets.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -11,7 +12,10 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool isLoading = false;
+  String nombre = '';
+  String apellido = '';
   String email = '';
+  String telefono = '';
   String password = '';
   String confirmPassword = '';
   @override
@@ -46,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   FadeInUp(
                       duration: Duration(milliseconds: 1000),
                       child: Text(
-                        "Sign up",
+                        "Registro",
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
                       )),
@@ -56,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   FadeInUp(
                       duration: Duration(milliseconds: 1200),
                       child: Text(
-                        "Create an account, It's free",
+                        "Crea una cuenta, es gratis!",
                         style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                       )),
                 ],
@@ -65,7 +69,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: <Widget>[
                   FadeInUp(
                     duration: Duration(milliseconds: 1200),
-                    child: makeInput("Email", null, (text) {
+                    child: makeInput("Nombre", null, (text) {
+                      email = text;
+                    }),
+                  ),
+                  FadeInUp(
+                    duration: Duration(milliseconds: 1200),
+                    child: makeInput("Apellidos", null, (text) {
+                      email = text;
+                    }),
+                  ),
+                  FadeInUp(
+                    duration: Duration(milliseconds: 1200),
+                    child: makeInput("E-mail", null, (text) {
+                      email = text;
+                    }),
+                  ),
+                  FadeInUp(
+                    duration: Duration(milliseconds: 1200),
+                    child: makeInput("Telefono", null, (text) {
                       email = text;
                     }),
                   ),
@@ -111,11 +133,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           });
                           final res = await register(email, password);
                           if (res) {
+
+                            final now = DateTime.now();                          
+
                             final data = Customer(
-                              nombre: 'nombre',
-                              apellido: 'apellido',
-                              edad: '12',
+                              nombre: nombre,
+                              apellido: apellido,
                               email: email,
+                              telefono: telefono,
+                              fechaRegistro: DateFormat.yMd().add_jm().format(now).toString(),
                             );
                             final resData = await saveDataUser(data);
                             // todo: iria a home

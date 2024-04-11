@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       FadeInUp(
                           duration: Duration(milliseconds: 1200),
                           child: Text(
-                            "Login to your account",
+                            "Accede a tu cuenta",
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[700]),
                           )),
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => HomePage()));
+                                          builder: (_) => HomeScreen()));
                                 } else {
                                   // todo: mostraria error
                                 }
