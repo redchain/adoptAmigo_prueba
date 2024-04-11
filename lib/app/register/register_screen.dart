@@ -142,12 +142,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         MaterialPageRoute(
                                             builder: (context) => HomeScreen()))
                                   })
-                              .catchError((error, stackTrace) {
-                            showToast("Error al registrar el usuario", "error");
-                          });
+                              .catchError((error) {
+                            setState(() {
+                              isLoading = false;
+                            });
 
-                          setState(() {
-                            isLoading = false;
+                            showToast("Error al registrar el usuario", "error");
                           });
                         }
                       },

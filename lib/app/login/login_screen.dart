@@ -92,22 +92,36 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 60,
                             onPressed: () async {
                               if (email.isEmpty && password.isEmpty) {
-                                // todo: mostrar error
+                                showToast("Email y contraseña son obligatorios",
+                                    "info");
                               } else {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                final res = await login(email, password);
-                                if (res) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => HomeScreen()));
-                                } else {
-                                  // todo: mostraria error
-                                }
-                                setState(() {
-                                  isLoading = false;
+                                  await login(email, password)
+                                    .then((data) => {
+                                          if (data)
+                                            {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          HomeScreen()))
+                                            }
+                                          else
+                                            {                                            
+                                              setState(() {
+                                                isLoading = false;
+                                              })
+                                            }
+                                        })
+                                    .catchError((error) {
+
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+
+                                 // showToast("Login error", "error");
                                 });
                               }
                             },
