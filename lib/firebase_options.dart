@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,41 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAGO71CYPggLLKP_4dJzEwN4ge0DSu04g4',
-    appId: '1:584743494623:web:3559d322461f54293e1a6a',
-    messagingSenderId: '584743494623',
-    projectId: 'prueba-46e03',
-    authDomain: 'prueba-46e03.firebaseapp.com',
-    databaseURL: 'https://prueba-46e03-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'prueba-46e03.appspot.com',
+    apiKey: 'AIzaSyBm5amV6OJc8fkUeur9GCNa7ZfBbDOsr2s',
+    appId: '1:695985571055:web:042d59428e17284482c71a',
+    messagingSenderId: '695985571055',
+    projectId: 'adoptamigo-ae1c2',
+    authDomain: 'adoptamigo-ae1c2.firebaseapp.com',
+    storageBucket: 'adoptamigo-ae1c2.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD9EJFOzP4WQ3FAufvIZZCQ-1Cc-FrhNJU',
-    appId: '1:584743494623:android:e105a0b66d8778b83e1a6a',
-    messagingSenderId: '584743494623',
-    projectId: 'prueba-46e03',
-    databaseURL: 'https://prueba-46e03-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'prueba-46e03.appspot.com',
+    apiKey: 'AIzaSyA7Wn2i2TEg6vxLeQwujTGVdxqtXD4ZZZQ',
+    appId: '1:695985571055:android:ddd8c5126ac5eb1c82c71a',
+    messagingSenderId: '695985571055',
+    projectId: 'adoptamigo-ae1c2',
+    storageBucket: 'adoptamigo-ae1c2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDTydAJbmSD6ZdnTv-jc-mSGm-wuJA6x5g',
-    appId: '1:584743494623:ios:c70ebb3681b96db33e1a6a',
-    messagingSenderId: '584743494623',
-    projectId: 'prueba-46e03',
-    databaseURL: 'https://prueba-46e03-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'prueba-46e03.appspot.com',
+    apiKey: 'AIzaSyBNayXwoOZv8wqzMkDq7dz6NTnGH-4fl54',
+    appId: '1:695985571055:ios:bb5794748d52a8b782c71a',
+    messagingSenderId: '695985571055',
+    projectId: 'adoptamigo-ae1c2',
+    storageBucket: 'adoptamigo-ae1c2.appspot.com',
     iosBundleId: 'com.example.adoptaAmigo',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDTydAJbmSD6ZdnTv-jc-mSGm-wuJA6x5g',
-    appId: '1:584743494623:ios:80b94a2ba49f36223e1a6a',
-    messagingSenderId: '584743494623',
-    projectId: 'prueba-46e03',
-    databaseURL: 'https://prueba-46e03-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'prueba-46e03.appspot.com',
-    iosBundleId: 'com.example.adoptaAmigo.RunnerTests',
+    apiKey: 'AIzaSyBNayXwoOZv8wqzMkDq7dz6NTnGH-4fl54',
+    appId: '1:695985571055:ios:bb5794748d52a8b782c71a',
+    messagingSenderId: '695985571055',
+    projectId: 'adoptamigo-ae1c2',
+    storageBucket: 'adoptamigo-ae1c2.appspot.com',
+    iosBundleId: 'com.example.adoptaAmigo',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBm5amV6OJc8fkUeur9GCNa7ZfBbDOsr2s',
+    appId: '1:695985571055:web:adeccc7695a4f74182c71a',
+    messagingSenderId: '695985571055',
+    projectId: 'adoptamigo-ae1c2',
+    authDomain: 'adoptamigo-ae1c2.firebaseapp.com',
+    storageBucket: 'adoptamigo-ae1c2.appspot.com',
+  );
+
 }

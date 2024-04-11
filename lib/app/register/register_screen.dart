@@ -1,9 +1,8 @@
-import 'package:adopta_amigo/app/model/customer.dart';
+import 'package:adopta_amigo/app/home/home.dart';
 import 'package:adopta_amigo/app/register/function.dart';
 import 'package:adopta_amigo/app/widgets.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -70,13 +69,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   FadeInUp(
                     duration: Duration(milliseconds: 1200),
                     child: makeInput("Nombre", null, (text) {
-                      email = text;
+                      nombre = text;
                     }),
                   ),
                   FadeInUp(
                     duration: Duration(milliseconds: 1200),
                     child: makeInput("Apellidos", null, (text) {
-                      email = text;
+                      apellido = text;
                     }),
                   ),
                   FadeInUp(
@@ -88,18 +87,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   FadeInUp(
                     duration: Duration(milliseconds: 1200),
                     child: makeInput("Telefono", null, (text) {
-                      email = text;
+                      telefono = text;
                     }),
                   ),
                   FadeInUp(
                     duration: Duration(milliseconds: 1300),
-                    child: makeInput("Password", null, (text) {
+                    child: makeInput("Contraseña", null, (text) {
                       password = text;
                     }),
                   ),
                   FadeInUp(
                     duration: Duration(milliseconds: 1400),
-                    child: makeInput("Confirmas password", null, (text) {
+                    child: makeInput("Confirmar contraseña", null, (text) {
                       confirmPassword = text;
                     }),
                   ),
@@ -124,30 +123,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         if (email.isEmpty &&
                             password.isEmpty &&
                             confirmPassword.isEmpty) {
-                          // todo: mostrar error
+                          showToast(
+                              "Email y contraseña son obligatorios", "warning");
                         } else if (password != confirmPassword) {
-                          // todo: mostrr error de claves
+                          showToast(
+                              "La contraseña y la confirmación no son iguales",
+                              "warning");
                         } else {
                           setState(() {
                             isLoading = true;
                           });
-                          final res = await register(email, password);
-                          if (res) {
 
-                            final now = DateTime.now();                          
+                          await register(
+                                  email, password, nombre, apellido, telefono)
+                              .then((data) => {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomeScreen()))
+                                  })
+                              .catchError((error, stackTrace) {
+                            showToast("Error al registrar el usuario", "error");
+                          });
 
-                            final data = Customer(
-                              nombre: nombre,
-                              apellido: apellido,
-                              email: email,
-                              telefono: telefono,
-                              fechaRegistro: DateFormat.yMd().add_jm().format(now).toString(),
-                            );
-                            final resData = await saveDataUser(data);
-                            // todo: iria a home
-                          } else {
-                            // todo: mostraria error
-                          }
                           setState(() {
                             isLoading = false;
                           });

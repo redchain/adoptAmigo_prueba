@@ -1,5 +1,4 @@
 import 'package:adopta_amigo/app/home/home.dart';
-import 'package:adopta_amigo/app/model/customer.dart';
 import 'package:adopta_amigo/app/profile/function.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,7 +29,7 @@ class Profile extends StatelessWidget {
                       children: const [
                         CircleAvatar(
                           maxRadius: 65,
-                          //backgroundImage: AssetImage("assets/6195145.jpg"),
+                          backgroundImage: AssetImage("iprofile.jpg"),
                         ),
                       ],
                     ),
@@ -50,18 +49,32 @@ class Profile extends StatelessWidget {
                         )
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [Text("@peakyBlinders")],
-                    ),
                     const SizedBox(
                       height: 15,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
-                          "Master manipulator, deal-maker and\n                   entrepreneur",
+                          "Nombre : ${snapshot.data!.nombre}" ,
+                          style: TextStyle(fontSize: 20),
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Apellido : ${snapshot.data!.apellido}",
+                          style: TextStyle(fontSize: 20),
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:  [
+                        Text(
+                          "Telefono :  ${snapshot.data!.telefono}",
                           style: TextStyle(fontSize: 20),
                         )
                       ],

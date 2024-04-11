@@ -1,22 +1,21 @@
 {
   "project_info": {
-    "project_number": "584743494623",
-    "firebase_url": "https://prueba-46e03-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "prueba-46e03",
-    "storage_bucket": "prueba-46e03.appspot.com"
+    "project_number": "695985571055",
+    "project_id": "adoptamigo-ae1c2",
+    "storage_bucket": "adoptamigo-ae1c2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:584743494623:android:e105a0b66d8778b83e1a6a",
+        "mobilesdk_app_id": "1:695985571055:android:5b1145966e70388a82c71a",
         "android_client_info": {
-          "package_name": "com.example.adopta_amigo"
+          "package_name": "com.adoptamigo.proyecto"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD9EJFOzP4WQ3FAufvIZZCQ-1Cc-FrhNJU"
+          "current_key": "AIzaSyA7Wn2i2TEg6vxLeQwujTGVdxqtXD4ZZZQ"
         }
       ],
       "services": {
@@ -27,15 +26,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:584743494623:android:2ffff0384926cd723e1a6a",
+        "mobilesdk_app_id": "1:695985571055:android:ddd8c5126ac5eb1c82c71a",
         "android_client_info": {
-          "package_name": "com.example.adoptamigo"
+          "package_name": "com.example.adopta_amigo"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD9EJFOzP4WQ3FAufvIZZCQ-1Cc-FrhNJU"
+          "current_key": "AIzaSyA7Wn2i2TEg6vxLeQwujTGVdxqtXD4ZZZQ"
         }
       ],
       "services": {
