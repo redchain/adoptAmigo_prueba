@@ -66,6 +66,9 @@ class MainListPets extends StatelessWidget {
     return FutureBuilder<dynamic>(
         future: getPetList(),
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
+          }
           if (snapshot.hasData) {
             return Center(
               child: Container(
