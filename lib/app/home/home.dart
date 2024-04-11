@@ -63,7 +63,7 @@ class MainListPets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<dynamic>(
+    return FutureBuilder<List<Pet>>(
         future: getPetList(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -74,9 +74,9 @@ class MainListPets extends StatelessWidget {
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: ListView.builder(
-                  itemCount: snapshot.data.length,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final item = snapshot.data[index];
+                    final item = snapshot.data![index];
                     return Container(
                       height: 136,
                       margin: const EdgeInsets.symmetric(
@@ -127,7 +127,7 @@ class MainListPets extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8.0),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(item.imageUrl),
+                                    image: NetworkImage(item.urlImage),
                                   ))),
                         ],
                       ),

@@ -30,15 +30,15 @@ import 'package:firebase_auth/firebase_auth.dart';
   //throw Exception('Error pet list');
 }*/
 
-Future getPetList() async {
+Future<List<Pet>> getPetList() async {
   final db = FirebaseFirestore.instance;
 
-  List<Pet>? animales;
+  List<Pet> animales = [];
 
-  QuerySnapshot querySnapshot = await db.collection("animales").get();
+  final querySnapshot = await db.collection("animales").get();
 
   for (var docSnapshot in querySnapshot.docs) {
-    final data = docSnapshot.data() as Map<String, dynamic>;
+    final data = docSnapshot.data();
 
     // Access specific fields in the document
     // var nombre = data['nombre'];
@@ -47,7 +47,7 @@ Future getPetList() async {
     // var urlImage = data['urlImage'];
     // var idProtectora = data['idProtectora'];
 
-    animales!.add(Pet.fromMap(data));
+    animales.add(Pet.fromMap(data));
   }
 
   return animales;
