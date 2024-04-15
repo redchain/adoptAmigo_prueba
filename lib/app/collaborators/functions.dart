@@ -1,12 +1,13 @@
-import 'package:adopta_amigo/app/model/pet.dart';
+import 'package:adopta_amigo/app/model/collaborator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<Map<dynamic,Pet>> getPetList() async {
+
+Future<Map<dynamic,Collaborator>> getCollaboratorList() async {
   final db = FirebaseFirestore.instance;
 
-  Map<dynamic,Pet> animales = {};
+  Map<dynamic,Collaborator> returnData = {};
 
-  final querySnapshot = await db.collection("animales").get();
+  final querySnapshot = await db.collection("protectoras").get();
 
   for (var docSnapshot in querySnapshot.docs) {
     final data = docSnapshot.data();
@@ -18,9 +19,9 @@ Future<Map<dynamic,Pet>> getPetList() async {
     // var urlImage = data['urlImage'];
     // var idProtectora = data['idProtectora'];
    // animales.pu(Pet.fromMap(data));
-    animales[docSnapshot.id] = Pet.fromMap(data);
+    returnData[docSnapshot.id] = Collaborator.fromMap(data);
   }
 
-  return animales;
+  return returnData;
 }
 

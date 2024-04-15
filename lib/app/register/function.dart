@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
-import 'package:flutter/material.dart';
 
 Future register(String email, String password, String nombre, String apellido,
     String telefono) async {

@@ -1,29 +1,28 @@
+import 'package:adopta_amigo/app/home/home.dart';
 import 'package:adopta_amigo/app/profile/collaborator_screen.dart';
-import 'package:adopta_amigo/app/profile/pet_screen.dart';
 import 'package:adopta_amigo/app/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:adopta_amigo/app/home/function.dart';
-import 'package:adopta_amigo/app/model/pet.dart';
-import 'package:adopta_amigo/app/collaborators/collaborators_screen.dart';
+import 'package:adopta_amigo/app/collaborators/functions.dart';
+import 'package:adopta_amigo/app/model/collaborator.dart';
 
-final List<String> _menuItems = <String>['Home', 'Perfil', 'Protectoras'];
+final List<String> _menuItems = <String>['Home', 'Pefil', 'Protectoras'];
 
-class HomeScreen extends StatefulWidget {
+class CollaboratorsScreen extends StatefulWidget {
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CollaboratorsScreen> createState() => _CollaboratorsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CollaboratorsScreenState extends State<CollaboratorsScreen> {
   var selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return PetList();
+    return CollaboratorList();
   }
 }
 
-class PetList extends StatelessWidget {
-  PetList({Key? key}) : super(key: key);
+class CollaboratorList extends StatelessWidget {
+  CollaboratorList({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -53,21 +52,21 @@ class PetList extends StatelessWidget {
               ),
             )),
         drawer: isLargeScreen ? null : DrawerMenu(scaffoldKey: _scaffoldKey),
-        body: MainListPets(),
+        body: MainListCollaborators(),
       ),
     );
   }
 }
 
-class MainListPets extends StatelessWidget {
-  const MainListPets({
+class MainListCollaborators extends StatelessWidget {
+  const MainListCollaborators({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Map<dynamic, Pet>>(
-        future: getPetList(),
+    return FutureBuilder<Map<dynamic, Collaborator>>(
+        future: getCollaboratorList(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
@@ -95,7 +94,7 @@ class MainListPets extends StatelessWidget {
                        Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PetScreen(uid : data[index].key)));
+                                builder: (context) => CollaboratorScreen(uid : data[index].key)));
                                
                         },
                         child:Row(
@@ -113,7 +112,7 @@ class MainListPets extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 8),
-                              Text("${data[index].value.especie} -  ${data[index].value.descripcion}",
+                              Text("${data[index].value.contacto} -  ${data[index].value.ubicacion}",
                                   style: Theme.of(context).textTheme.bodySmall),
                               const SizedBox(height: 8),
                               Row(
@@ -180,7 +179,10 @@ class DrawerMenu extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => ProfileScreen()));
                       } else if (item == "Home") {
-                        Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
                       }else if(item == "Protectoras"){
                          Navigator.push(
                             context,
