@@ -3,6 +3,7 @@ import 'package:adopta_amigo/app/profile/function.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:adopta_amigo/app/login/login_screen.dart';
+import 'package:adopta_amigo/app/profile/pet_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -112,7 +113,16 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       )),
                     ),
-                    Expanded(child: _horizontalListView())
+                   Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Amigos adoptados",
+                          style: TextStyle(fontSize: 20),
+                        )
+                      ],
+                    ),
+                    Expanded(child: petListView())
                   ],
                 ),
               );
@@ -124,18 +134,73 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _horizontalListView() {
+  Widget petListView() {
     return SizedBox(
-      height: 120,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (_, __) => _buildBox(color: Colors.orange),
-      ),
-    );
+        height: 120,
+        child: FutureBuilder(
+            future: getUserPetList(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+               return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = snapshot.data;
+                    var data = item!.entries.toList();
+                    return Container(
+                      margin: EdgeInsets.all(12),
+                      height: 100,
+                      width: 200,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PetScreen(uid: data[index].key)));
+                        },
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  data[index].value.nombre,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                    "${data[index].value.especie} -  ${data[index].value.descripcion}",
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall)
+                              ],
+                            )),
+                            Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          data[index].value.urlImage),
+                                    ))),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+              return CircularProgressIndicator();
+            }));
   }
-
-  Widget _buildBox({color}) => Container(
-      margin: EdgeInsets.all(12), height: 100, width: 200, color: color);
 }
 
 class BackButton extends StatelessWidget {

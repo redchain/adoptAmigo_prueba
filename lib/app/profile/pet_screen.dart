@@ -61,10 +61,9 @@ class PetScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(
-                            flex: 1,
-                            child: Text(snapshot.data!.descripcion,
-                                style: TextStyle(fontSize: 20), softWrap: true))
+                        Text(
+                           snapshot.data!.descripcion,
+                                style: TextStyle(fontSize: 20), softWrap: true)
                       ],
                     ),
                     Row(

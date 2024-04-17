@@ -1,4 +1,3 @@
-import 'package:adopta_amigo/app/profile/collaborator_screen.dart';
 import 'package:adopta_amigo/app/profile/pet_screen.dart';
 import 'package:adopta_amigo/app/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,22 +35,26 @@ class PetList extends StatelessWidget {
       home: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            titleSpacing: 0,
-            leading: isLargeScreen
-                ? null
-                : IconButton(
-                    icon: const Icon(Icons.menu),
-                    onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-                  ),
-            title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 11.0),
-              child: AspectRatio(
-                aspectRatio: 4,
-                child: Image.asset('../assets/logo_2.png'),
-              ),
-            )),
+          backgroundColor: Color.fromARGB(182, 14, 172, 116),
+          elevation: 0,
+          titleSpacing: 1,
+          leading: isLargeScreen
+              ? null
+              : IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                ),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('../assets/logo_2.png',
+                    height: 75, fit: BoxFit.contain)
+              ],
+            ),
+          ),
+        ),
         drawer: isLargeScreen ? null : DrawerMenu(scaffoldKey: _scaffoldKey),
         body: MainListPets(),
       ),
@@ -74,82 +77,68 @@ class MainListPets extends StatelessWidget {
           }
           if (snapshot.hasData) {
             return Center(
-              child: Container(
+              child: Container(               
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     final item = snapshot.data;
-                    var data = item!.entries.toList();                    
+                    var data = item!.entries.toList();
                     return Container(
-                      height: 136,
+                      height: 200,
                       margin: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8.0),
                       decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFFE0E0E0)),
+                          border: Border.all(
+                              color: Color.fromARGB(255, 57, 89, 179)),
                           borderRadius: BorderRadius.circular(8.0)),
                       padding: const EdgeInsets.all(8),
-                      child: 
-                      GestureDetector(
+                      child: GestureDetector(
                         onTap: () {
-                       Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PetScreen(uid : data[index].key)));
-                               
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PetScreen(uid: data[index].key)));
                         },
-                        child:Row(
-                        children: [           
-                          Expanded(
-                              child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                data[index].value.nombre,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 8),
-                              Text("${data[index].value.especie} -  ${data[index].value.descripcion}",
-                                  style: Theme.of(context).textTheme.bodySmall),
-                              const SizedBox(height: 8),
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icons.bookmark_border_rounded,
-                                  Icons.share,
-                                  Icons.more_vert
-                                ].map((e) {
-                                  return InkWell(
-                                    onTap: () {},
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
-                                      child: Icon(e, size: 16),
-                                    ),
-                                  );
-                                }).toList(),
-                              )
-                            ],
-                          )),
-                          Container(
-                              width: 100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(data[index].value.urlImage),
-                                  ))),
-                        ],
-                      ), 
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  data[index].value.nombre,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  "${data[index].value.especie} -  ${data[index].value.descripcion}",
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            )),
+                            Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          data[index].value.urlImage),
+                                    ))),
+                          ],
+                        ),
                       ),
-            
-                      
                     );
                   },
                 ),
@@ -173,7 +162,7 @@ class DrawerMenu extends StatelessWidget {
         child: ListView(
           children: _menuItems
               .map((item) => ListTile(
-                    onTap: () {                
+                    onTap: () {
                       if (item == "Perfil") {
                         Navigator.push(
                             context,
@@ -181,8 +170,8 @@ class DrawerMenu extends StatelessWidget {
                                 builder: (context) => ProfileScreen()));
                       } else if (item == "Home") {
                         Navigator.pop(context);
-                      }else if(item == "Protectoras"){
-                         Navigator.push(
+                      } else if (item == "Protectoras") {
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => CollaboratorsScreen()));
